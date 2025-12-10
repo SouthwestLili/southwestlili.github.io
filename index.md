@@ -1,8 +1,45 @@
-<h3 align="left">
-  <span style="background: linear-gradient(90deg, #a6ffcb, #12d8fa, #1fa2ff); -webkit-background-clip: text; color: transparent;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lili's Homepage</title>
+
+    <!-- 加载艺术字体 Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 全局字体可保持默认，也可以换 */
+        body {
+            margin: 40px;
+        }
+
+        /* 去掉默认下划线（GitHub Pages 会给标题加 border-bottom） */
+        h1, h2, h3 {
+            border-bottom: none !important;
+        }
+
+        /* h3 使用艺术字体 */
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 你的艺术渐变标题 -->
+<h3 align="left" style="font-family: 'Playfair Display', serif; font-weight: 700; border-bottom: none !important;">
+  <span style="background: linear-gradient(90deg, #a6ffcb, #12d8fa, #1fa2ff); 
+               -webkit-background-clip: text; 
+               color: transparent;">
     💚 Hi, I'm Lili. Happy to see you!👋
   </span>
 </h3>
+
+</body>
+</html>
+
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Bitcount&weight=400&size=19&pause=1000&color=1AFF10&background=FF165700&center=true&width=435&lines=Passionate+about+Software+Development)](https://git.io/typing-svg)
 
