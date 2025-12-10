@@ -1,8 +1,8 @@
-<h2 align="left">
+<h3 align="left">
   <span style="background: linear-gradient(90deg, #a6ffcb, #12d8fa, #1fa2ff); -webkit-background-clip: text; color: transparent;">
-    💚 Hi, I'm Lili. Happpy to see you!👋
+    💚 Hi, I'm Lili. Happy to see you!👋
   </span>
-</h2>
+</h3>
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Bitcount&weight=400&size=19&pause=1000&color=1AFF10&background=FF165700&center=true&width=435&lines=Passionate+about+Software+Development)](https://git.io/typing-svg)
 
