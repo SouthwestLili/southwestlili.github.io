@@ -4,114 +4,229 @@
     <meta charset="UTF-8">
     <title>Lili's Homepage</title>
 
-    <!-- 加载艺术字体 Playfair Display -->
+    <!-- 艺术字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* 全局基础设置（保持简单） */
+        /* 全局基础设置 */
         body {
             margin: 40px;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             line-height: 1.6;
+            background: #f7fafc;
+            color: #1a202c;
         }
 
-        /* 去掉默认下划线（GitHub Pages 会给标题加 border-bottom） */
+        /* 去掉默认下划线（GitHub Pages 对 h1/h2/h3 的样式） */
         h1, h2, h3 {
             border-bottom: none !important;
         }
 
-        /* h1 使用艺术字体 */
-        h1 {
+        /* 顶部主标题（保持左对齐） */
+        .main-title {
             font-family: 'Playfair Display', serif;
             font-weight: 1000;
-            margin-top: 20px;
+            border-bottom: none !important;
+            margin-left: 40px;
+            margin-bottom: 24px;
         }
 
-        h2, h3 {
-            margin-top: 32px;
+        /* 渐变文字 + 流光动画 */
+        .gradient-text {
+            background: linear-gradient(90deg, #a6ffcb, #12d8fa, #1fa2ff, #a6ffcb);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: gradient-move 4s linear infinite;
+        }
+
+        @keyframes gradient-move {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 中间内容区域：整体居中 + 左右 padding */
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* 打字效果区域居中 */
+        .typing-wrapper {
+            text-align: center;
+            margin: 16px 0 24px;
+        }
+
+        /* 两栏布局容器 */
+        .layout {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .column {
+            flex: 1 1 320px; /* 宽度自适应，最小 320px */
+        }
+
+        /* 卡片样式 */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 24px 24px 20px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+        }
+
+        .card h2, .card h3 {
+            margin-top: 0;
+            font-family: 'Playfair Display', serif;
         }
 
         ul {
+            text-align: left;
             padding-left: 1.2rem;
+            margin: 0;
         }
 
         li {
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         hr {
-            margin: 32px 0;
+            margin: 32px auto;
+            width: 70%;
+            border: none;
+            border-top: 1px solid #e2e8f0;
         }
 
-        .center {
+        /* Tech Icons 容器 */
+        .tech-icons {
             text-align: center;
+            margin-top: 8px;
+        }
+
+        .tech-icons code {
+            display: inline-block;
+            margin: 6px;
+            padding: 6px;
+            border-radius: 12px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        .tech-icons code img {
+            display: block;
+        }
+
+        /* Hover 效果：略微放大 + 抬升 + 阴影 + 提亮 */
+        .tech-icons code:hover {
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
+            filter: brightness(1.08);
+        }
+
+        /* 小屏优化 */
+        @media (max-width: 768px) {
+            body {
+                margin: 20px;
+            }
+
+            .main-title {
+                margin-left: 20px;
+            }
+
+            .content {
+                padding: 0 16px;
+            }
+
+            .card {
+                padding: 20px 18px 18px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- 艺术渐变标题 -->
-    <h1 align="left" style="font-family: 'Playfair Display', serif; font-weight: 1000; border-bottom: none !important;">
-      <span style="background: linear-gradient(90deg, #a6ffcb, #12d8fa, #1fa2ff);
-                   -webkit-background-clip: text;
-                   color: transparent;">
+    <!-- 顶部标题：保持左对齐不变 -->
+    <h1 class="main-title">
+      <span class="gradient-text">
         💚 Hi, I'm Lili. Happy to see you!👋
       </span>
     </h1>
 
-    <!-- Typing SVG 动态文字 -->
-    <div class="center" style="margin-top: 16px;">
-        <a href="https://git.io/typing-svg">
-            <img
-                src="https://readme-typing-svg.demolab.com?font=Bitcount&weight=400&size=19&pause=1000&color=1AFF10&background=FF165700&center=true&width=435&lines=Passionate+about+Software+Development"
-                alt="Typing SVG"
-            />
-        </a>
-    </div>
+    <!-- 中间主内容区域 -->
+    <div class="content">
 
-    <!-- 个人简介 bullet 列表 -->
-    <ul>
-        <li>🥬 Currently pursuing <strong>Computer Science - Artificial Intelligence and Machine Learning studies at Carleton University</strong></li>
-        <li>🎄 Currently completing <strong>the MIT x MicroMasters Program in Statistics and Data Science</strong></li>
-        <li>🥒 I’m currently working on exciting full-stack and AI-driven projects</li>
-        <li>🫛 Exploring topics in algorithms, system design, and web architecture</li>
-        <li>🍀 Hold a Bachelor’s degree in Electrical Engineering</li>
-        <li>🍁 Canadian citizen with TN visa eligibility for employment in the United States</li>
-        <li>🥑 How to reach me: <a href="mailto:lili.bnottawa@gmail.com">lili.bnottawa@gmail.com</a></li>
-        <li>🍏 Pronouns: she/her</li>
-        <li>🥝 Fun fact: I love building things that blend creativity with code!</li>
-        <li>🫑 Always eager to learn and collaborate on new projects!</li>
-        <li>🥦 My Portfolio website - <a href="https://liliwang.dev/" target="_blank" rel="noreferrer">https://liliwang.dev/</a></li>
-        <li>🍐 My Community: <a href="https://www.sylvanet.org/" target="_blank" rel="noreferrer">https://www.sylvanet.org/</a></li>
-        <li>💚 SylvaNet Hub was founded on August 9, 2025 &amp; Features are still under development..</li>
-    </ul>
+        <!-- Typing SVG 动画文字 -->
+        <div class="typing-wrapper">
+            <a href="https://git.io/typing-svg">
+                <img
+                    src="https://readme-typing-svg.demolab.com?font=Bitcount&weight=400&size=19&pause=1000&color=1AFF10&background=FF165700&center=true&width=435&lines=Passionate+about+Software+Development"
+                    alt="Typing SVG"
+                />
+            </a>
+        </div>
 
-    <hr />
+        <!-- 两栏卡片布局 -->
+        <div class="layout">
 
-    <!-- Tech Stack 标题 -->
-    <h2>🛠️ Tech Stack</h2>
+            <!-- 左侧：About / Info 卡片 -->
+            <div class="column">
+                <div class="card">
+                    <h2>About Me</h2>
+                    <ul>
+                        <li>🥬 Currently pursuing <strong>Computer Science - Artificial Intelligence and Machine Learning studies at Carleton University</strong></li>
+                        <li>🎄 Currently completing <strong>the MIT x MicroMasters Program in Statistics and Data Science</strong></li>
+                        <li>🥒 Currently working on exciting full-stack and AI-driven projects</li>
+                        <li>🫛 Exploring topics in algorithms, system design, and web architecture</li>
+                        <li>🍀 Bachelor’s degree in Electrical Engineering</li>
+                        <li>🍁 Canadian citizen with TN visa eligibility for U.S. employment</li>
+                        <li>🥑 Contact: <a href="mailto:lili.bnottawa@gmail.com">lili.bnottawa@gmail.com</a></li>
+                        <li>🍏 Pronouns: she/her</li>
+                        <li>🥝 Fun fact: I love blending creativity with code!</li>
+                        <li>🫑 Always eager to learn and collaborate!</li>
+                        <li>🥦 Portfolio: <a href="https://liliwang.dev/" target="_blank" rel="noreferrer">https://liliwang.dev/</a></li>
+                        <li>🍐 Community: <a href="https://www.sylvanet.org/" target="_blank" rel="noreferrer">https://www.sylvanet.org/</a></li>
+                        <li>💚 SylvaNet Hub was founded on August 9, 2025 — features under development.</li>
+                    </ul>
+                </div>
+            </div>
 
-    <h3>Languages</h3>
-    <div align="center">
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" title="HTML" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" title="CSS" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" title="JavaScript" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" title="Java" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" title="Python" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" alt="MySQL" title="MySQL" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" alt="mongoDB" title="mongoDB" /></code>
-    </div>
+            <!-- 右侧：Tech Stack 卡片 -->
+            <div class="column">
+                <div class="card">
+                    <h2>🛠️ Tech Stack</h2>
 
-    <h3>Frameworks &amp; Libraries</h3>
-    <div align="center">
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" alt="Tailwind CSS" title="Tailwind CSS" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" title="React" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" title="Node.js" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" alt="Next.js" title="Next.js" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" title="Spring Boot" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" alt="Supabase" title="Supabase" /></code>
-        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" alt="Express" title="Express" /></code>
-    </div>
+                    <h3>Languages</h3>
+                    <div class="tech-icons">
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" title="HTML" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" title="CSS" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" title="JavaScript" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" title="Java" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" title="Python" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" alt="MySQL" title="MySQL" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" alt="mongoDB" title="mongoDB" /></code>
+                    </div>
+
+                    <h3>Frameworks &amp; Libraries</h3>
+                    <div class="tech-icons">
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" alt="Tailwind CSS" title="Tailwind CSS" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" title="React" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" title="Node.js" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" alt="Next.js" title="Next.js" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" title="Spring Boot" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" alt="Supabase" title="Supabase" /></code>
+                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" alt="Express" title="Express" /></code>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /layout -->
+
+        <hr />
+
+    </div> <!-- /content -->
 
 </body>
 </html>
