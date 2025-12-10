@@ -7,10 +7,6 @@
   </span>
 </h1>
 
-</body>
-</html>
-
-
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Bitcount&weight=400&size=19&pause=1000&color=1AFF10&background=FF165700&center=true&width=435&lines=Passionate+about+Software+Development)](https://git.io/typing-svg)
 
 
