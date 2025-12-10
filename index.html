@@ -15,6 +15,8 @@
             line-height: 1.6;
             background: #f7fafc;
             color: #1a202c;
+            position: relative;
+            overflow-x: hidden;
         }
 
         /* 去掉默认下划线（GitHub Pages 对 h1/h2/h3 的样式） */
@@ -29,6 +31,8 @@
             border-bottom: none !important;
             margin-left: 40px;
             margin-bottom: 24px;
+            position: relative;
+            z-index: 2; /* 保证在动画层上方 */
         }
 
         /* 渐变文字 + 流光动画 */
@@ -51,6 +55,8 @@
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 40px;
+            position: relative;
+            z-index: 2; /* 也在动画层上方 */
         }
 
         /* Typing SVG 居中 */
@@ -59,7 +65,7 @@
             margin: 16px 0 24px;
         }
 
-        /* 竖向卡片布局（一个上一个下） */
+        /* 竖向卡片布局：一个上一个下 */
         .layout {
             max-width: 800px;
             margin: 0 auto;
@@ -102,7 +108,7 @@
             border-top: 1px solid #e2e8f0;
         }
 
-        /* Tech Icons 容器 */
+        /* Tech Icons 容器（卡片里的） */
         .tech-icons {
             text-align: center;
             margin-top: 8px;
@@ -127,6 +133,44 @@
             filter: brightness(1.08);
         }
 
+        /* ⭐ 掉落动画图标层 ⭐ */
+        .falling-icons {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;  /* 不挡点击 */
+            z-index: 1;            /* 在背景上，在内容下 */
+            overflow: visible;
+        }
+
+        .fall-icon {
+            position: absolute;
+            top: -80px;            /* 从屏幕上方外面开始 */
+            opacity: 0;
+            animation-name: fall;
+            animation-timing-function: ease-out;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards; /* 停在终点 */
+        }
+
+        /* 不同图标的“随机感”：位置 + 时长 + 延迟 */
+        .fall-1 { left: 8%;  animation-duration: 3.8s; animation-delay: 0.1s; }
+        .fall-2 { left: 22%; animation-duration: 4.2s; animation-delay: 0.4s; }
+        .fall-3 { left: 40%; animation-duration: 4.8s; animation-delay: 0.2s; }
+        .fall-4 { left: 62%; animation-duration: 4.0s; animation-delay: 0.6s; }
+        .fall-5 { left: 78%; animation-duration: 4.5s; animation-delay: 0.3s; }
+        .fall-6 { left: 90%; animation-duration: 5.0s; animation-delay: 0.7s; }
+
+        /* 掉落动画：
+           - 先从上方进入
+           - 中间有一点点左右偏移
+           - 最后停在大约卡片区域两侧附近（用 100vh - 常数 近似） */
+        @keyframes fall {
+            0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+            15%  { opacity: 1; }
+            60%  { transform: translate3d(-10px, 55vh, 0); }
+            100% { transform: translate3d(5px, 65vh, 0); opacity: 1; }
+        }
+
         /* 小屏优化 */
         @media (max-width: 768px) {
             body {
@@ -144,10 +188,24 @@
             .card {
                 padding: 20px 18px 18px;
             }
+
+            .fall-icon {
+                transform: scale(0.8);
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ⭐ 掉落动画图标层（只做动画用）⭐ -->
+    <div class="falling-icons">
+        <img class="fall-icon fall-1" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" />
+        <img class="fall-icon fall-2" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" />
+        <img class="fall-icon fall-3" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JS" />
+        <img class="fall-icon fall-4" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" />
+        <img class="fall-icon fall-5" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" />
+        <img class="fall-icon fall-6" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" />
+    </div>
 
     <!-- 顶部标题：保持左对齐不变 -->
     <h1 class="main-title">
