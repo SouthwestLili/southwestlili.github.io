@@ -53,22 +53,23 @@
             padding: 0 40px;
         }
 
-        /* 打字效果区域居中 */
+        /* Typing SVG 居中 */
         .typing-wrapper {
             text-align: center;
             margin: 16px 0 24px;
         }
 
-        /* 两栏布局容器 */
+        /* 竖向卡片布局（一个上一个下） */
         .layout {
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
+            flex-direction: column;
             gap: 24px;
-            align-items: flex-start;
-            flex-wrap: wrap;
         }
 
         .column {
-            flex: 1 1 320px; /* 宽度自适应，最小 320px */
+            width: 100%;
         }
 
         /* 卡片样式 */
@@ -168,10 +169,10 @@
             </a>
         </div>
 
-        <!-- 两栏卡片布局 -->
+        <!-- 竖向卡片布局：上 About, 下 Tech Stack -->
         <div class="layout">
 
-            <!-- 左侧：About / Info 卡片 -->
+            <!-- 上：About / Info 卡片 -->
             <div class="column">
                 <div class="card">
                     <h2>About Me</h2>
@@ -193,7 +194,7 @@
                 </div>
             </div>
 
-            <!-- 右侧：Tech Stack 卡片 -->
+            <!-- 下：Tech Stack 卡片 -->
             <div class="column">
                 <div class="card">
                     <h2>🛠️ Tech Stack</h2>
