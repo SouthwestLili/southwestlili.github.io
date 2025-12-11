@@ -137,7 +137,7 @@
         .falling-icons {
             position: fixed;
             inset: 0;
-            pointer-events: none;   /* 视觉上挡住文字，但不挡点击 */
+            pointer-events: none;   /* 可以挡住文字，但不挡点击 */
             z-index: 3;             /* 在内容上方 */
             overflow: visible;
         }
@@ -278,63 +278,64 @@
 
     </div> <!-- /content -->
 
-    <!-- 重力掉落动画脚本 -->
+    <!-- 重力掉落动画脚本：无事件绑定，直接运行 -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const icons = Array.from(document.querySelectorAll('.fall-icon'));
+        (function () {
+            var icons = Array.prototype.slice.call(document.querySelectorAll('.fall-icon'));
             if (!icons.length) return;
 
-            const screenW = window.innerWidth;
-            const screenH = window.innerHeight;
+            var screenW = window.innerWidth || document.documentElement.clientWidth;
+            var screenH = window.innerHeight || document.documentElement.clientHeight;
 
-            // 大概落在 60~75% 视窗高度（文字 card 两侧区域）
-            const groundMin = screenH * 0.60;
-            const groundMax = screenH * 0.75;
+            // 落在 60%~75% 高度区间（大概是 card 附近）
+            var groundMin = screenH * 0.60;
+            var groundMax = screenH * 0.75;
 
-            const g = 2600;              // 重力加速度（px/s^2）
-            const bounceFactor = 0.45;   // 弹性系数
-            const friction = 0.82;       // 水平速度衰减
-            const minBounceVy = 260;     // 小于这个速度就不再弹跳
+            var g = 2600;              // 重力加速度（px/s^2）
+            var bounceFactor = 0.45;   // 弹性系数
+            var friction = 0.82;       // 水平速度衰减
+            var minBounceVy = 260;     // 低于这个速度就不再弹跳
 
-            const states = icons.map((icon, index) => {
-                // 初始 X：按顺序均匀分布，再加一点随机偏移
-                const baseX = ((index + 1) / (icons.length + 1)) * screenW;
-                const randomOffset = (Math.random() - 0.5) * screenW * 0.18;
-                const x = baseX + randomOffset;
+            var states = icons.map(function (icon, index) {
+                var baseX = ((index + 1) / (icons.length + 1)) * screenW;
+                var randomOffset = (Math.random() - 0.5) * screenW * 0.18;
+                var x = baseX + randomOffset;
+                var y = - (80 + Math.random() * 180);
 
-                // 初始 Y 在屏幕上方，随机高一点
-                const y = - (80 + Math.random() * 180);
+                var vx = (Math.random() - 0.5) * 220; // 随机水平速度
+                var vy = 0;
 
-                // 随机水平速度，让轨迹不是直 up→down
-                const vx = (Math.random() - 0.5) * 220;
+                var groundY = groundMin + Math.random() * (groundMax - groundMin);
+                var delay = Math.random() * 0.7;
 
-                // 初始竖直速度
-                const vy = 0;
-
-                // 随机 groundY（落点高度），模拟落在 card 区域两侧
-                const groundY = groundMin + Math.random() * (groundMax - groundMin);
-
-                // 每个图标一个小延迟，让掉落更自然
-                const delay = Math.random() * 0.7;
-
-                // 初始直接透明
                 icon.style.opacity = 0;
 
-                return { icon, x, y, vx, vy, groundY, delay, done: false };
+                return {
+                    icon: icon,
+                    x: x,
+                    y: y,
+                    vx: vx,
+                    vy: vy,
+                    groundY: groundY,
+                    delay: delay,
+                    done: false
+                };
             });
 
-            let lastTime = performance.now();
+            var lastTime = performance.now();
 
             function step(now) {
-                const dt = (now - lastTime) / 1000;
+                var dt = (now - lastTime) / 1000;
+                if (dt > 0.05) dt = 0.05; // 防止切走标签造成 dt 过大
                 lastTime = now;
 
-                let allDone = true;
+                var allDone = true;
 
-                for (const s of states) {
+                for (var i = 0; i < states.length; i++) {
+                    var s = states[i];
                     if (s.done) continue;
 
-                    // 延迟阶段：不动，只减少 delay
+                    // 处理延迟
                     if (s.delay > 0) {
                         s.delay -= dt;
                         if (s.delay < 0) s.delay = 0;
@@ -343,31 +344,27 @@
 
                     allDone = false;
 
-                    // 应用重力
+                    // 重力
                     s.vy += g * dt;
 
                     // 更新位置
                     s.x += s.vx * dt;
                     s.y += s.vy * dt;
 
-                    // 限制 X 不要跑出屏幕太多
-                    if (s.x < -40) s.x = -40;
-                    if (s.x > screenW + 40) s.x = screenW + 40;
+                    // 限制 X 范围稍微宽一点
+                    if (s.x < -60) s.x = -60;
+                    if (s.x > screenW + 60) s.x = screenW + 60;
 
-                    // 触地检测 + 弹跳
+                    // 触地 + 弹跳
                     if (s.y >= s.groundY) {
                         s.y = s.groundY;
 
                         if (Math.abs(s.vy) > minBounceVy) {
-                            // 反弹
                             s.vy = -s.vy * bounceFactor;
-                            // 水平速度也稍微衰减
                             s.vx *= friction;
                         } else {
-                            // 速度太小了，停止弹跳，慢慢停下
                             s.vy = 0;
                             s.vx *= friction;
-
                             if (Math.abs(s.vx) < 10) {
                                 s.vx = 0;
                                 s.done = true;
@@ -377,19 +374,16 @@
 
                     // 更新样式
                     s.icon.style.opacity = 1;
-                    s.icon.style.transform = `translate3d(${s.x}px, ${s.y}px, 0)`;
+                    s.icon.style.transform = 'translate3d(' + s.x + 'px,' + s.y + 'px,0)';
                 }
 
                 if (!allDone) {
-                    requestAnimationFrame(step);
-                } else {
-                    // 最终停下后可以选择慢慢变淡（如果你想的话）
-                    // icons.forEach(ic => ic.style.transition = 'opacity 1s ease'; ic.style.opacity = 0.7;);
+                    window.requestAnimationFrame(step);
                 }
             }
 
-            requestAnimationFrame(step);
-        });
+            window.requestAnimationFrame(step);
+        })();
     </script>
 </body>
 </html>
