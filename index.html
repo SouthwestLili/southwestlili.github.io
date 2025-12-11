@@ -133,69 +133,22 @@
             filter: brightness(1.08);
         }
 
-        /* ⭐ 掉落动画图标层 ⭐ */
+        /* ⭐ 重力掉落动画图标层 ⭐ */
         .falling-icons {
             position: fixed;
             inset: 0;
-            pointer-events: none;  /* 只遮挡视觉，不影响点击 */
-            z-index: 3;            /* 在内容上方，标题之上也可以遮住 */
+            pointer-events: none;   /* 视觉上挡住文字，但不挡点击 */
+            z-index: 3;             /* 在内容上方 */
             overflow: visible;
         }
 
         .fall-icon {
             position: absolute;
-            top: -120px;           /* 从屏幕上方外面开始 */
-            width: 50px;           /* 与卡片图标大小一致 */
+            top: 0;
+            left: 0;
+            width: 50px;            /* 和卡片里的图标一样大 */
             opacity: 0;
-            animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards; /* 停在终点 */
-        }
-
-        /* 不同图标的“随机感”：位置 + 时长 + 延迟 + 路线（不同 keyframes） */
-        .fall-a { left: 10%; animation-name: fall-left;  animation-duration: 2.8s; animation-delay: 0.1s; }
-        .fall-b { left: 23%; animation-name: fall-zig;   animation-duration: 3.0s; animation-delay: 0.25s; }
-        .fall-c { left: 36%; animation-name: fall-right; animation-duration: 2.7s; animation-delay: 0.15s; }
-        .fall-d { left: 49%; animation-name: fall-zig;   animation-duration: 3.1s; animation-delay: 0.35s; }
-        .fall-e { left: 62%; animation-name: fall-left;  animation-duration: 2.9s; animation-delay: 0.2s; }
-        .fall-f { left: 75%; animation-name: fall-right; animation-duration: 3.0s; animation-delay: 0.3s; }
-        .fall-g { left: 88%; animation-name: fall-zig;   animation-duration: 3.2s; animation-delay: 0.4s; }
-
-        .fall-h { left: 5%;  animation-name: fall-right; animation-duration: 3.0s; animation-delay: 0.5s; }
-        .fall-i { left: 18%; animation-name: fall-left;  animation-duration: 2.8s; animation-delay: 0.55s; }
-        .fall-j { left: 31%; animation-name: fall-zig;   animation-duration: 3.1s; animation-delay: 0.6s; }
-        .fall-k { left: 44%; animation-name: fall-right; animation-duration: 2.9s; animation-delay: 0.65s; }
-        .fall-l { left: 57%; animation-name: fall-left;  animation-duration: 3.0s; animation-delay: 0.7s; }
-        .fall-m { left: 70%; animation-name: fall-zig;   animation-duration: 3.2s; animation-delay: 0.75s; }
-        .fall-n { left: 83%; animation-name: fall-right; animation-duration: 3.1s; animation-delay: 0.8s; }
-
-        /* 三种略微不同的掉落路线 + 弹跳效果 */
-        @keyframes fall-left {
-            0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-            10%  { opacity: 1; }
-            50%  { transform: translate3d(-25px, 45vh, 0); }
-            70%  { transform: translate3d(10px, 70vh, 0); }
-            85%  { transform: translate3d(-8px, 63vh, 0); }  /* 弹起 */
-            100% { transform: translate3d(0, 66vh, 0); opacity: 1; }
-        }
-
-        @keyframes fall-right {
-            0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-            10%  { opacity: 1; }
-            50%  { transform: translate3d(25px, 48vh, 0); }
-            70%  { transform: translate3d(-12px, 72vh, 0); }
-            85%  { transform: translate3d(6px, 64vh, 0); }   /* 弹起 */
-            100% { transform: translate3d(0, 68vh, 0); opacity: 1; }
-        }
-
-        @keyframes fall-zig {
-            0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-            10%  { opacity: 1; }
-            35%  { transform: translate3d(-18px, 30vh, 0); }
-            55%  { transform: translate3d(24px, 55vh, 0); }
-            75%  { transform: translate3d(-10px, 73vh, 0); }
-            88%  { transform: translate3d(6px, 64vh, 0); }   /* 弹起 */
-            100% { transform: translate3d(0, 67vh, 0); opacity: 1; }
+            will-change: transform, opacity;
         }
 
         /* 小屏优化 */
@@ -224,25 +177,25 @@
 </head>
 <body>
 
-    <!-- ⭐ 掉落动画图标层（与卡片图标同源，但只是动画用）⭐ -->
+    <!-- ⭐ 重力掉落动画图标层 ⭐ -->
     <div class="falling-icons">
         <!-- Languages + DB -->
-        <img class="fall-icon fall-a" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" />
-        <img class="fall-icon fall-b" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" />
-        <img class="fall-icon fall-c" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" />
-        <img class="fall-icon fall-d" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" />
-        <img class="fall-icon fall-e" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" />
-        <img class="fall-icon fall-f" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" alt="MySQL" />
-        <img class="fall-icon fall-g" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" alt="mongoDB" />
+        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" />
+        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" />
+        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" />
+        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" />
+        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" />
+        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" alt="MySQL" />
+        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" alt="mongoDB" />
 
         <!-- Frameworks & Libraries -->
-        <img class="fall-icon fall-h" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" alt="Tailwind CSS" />
-        <img class="fall-icon fall-i" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" />
-        <img class="fall-icon fall-j" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" />
-        <img class="fall-icon fall-k" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" alt="Next.js" />
-        <img class="fall-icon fall-l" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" />
-        <img class="fall-icon fall-m" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" alt="Supabase" />
-        <img class="fall-icon fall-n" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" alt="Express" />
+        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" alt="Tailwind CSS" />
+        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" />
+        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" />
+        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" alt="Next.js" />
+        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" />
+        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" alt="Supabase" />
+        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" alt="Express" />
     </div>
 
     <!-- 顶部标题：保持左对齐不变 -->
@@ -325,5 +278,118 @@
 
     </div> <!-- /content -->
 
+    <!-- 重力掉落动画脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const icons = Array.from(document.querySelectorAll('.fall-icon'));
+            if (!icons.length) return;
+
+            const screenW = window.innerWidth;
+            const screenH = window.innerHeight;
+
+            // 大概落在 60~75% 视窗高度（文字 card 两侧区域）
+            const groundMin = screenH * 0.60;
+            const groundMax = screenH * 0.75;
+
+            const g = 2600;              // 重力加速度（px/s^2）
+            const bounceFactor = 0.45;   // 弹性系数
+            const friction = 0.82;       // 水平速度衰减
+            const minBounceVy = 260;     // 小于这个速度就不再弹跳
+
+            const states = icons.map((icon, index) => {
+                // 初始 X：按顺序均匀分布，再加一点随机偏移
+                const baseX = ((index + 1) / (icons.length + 1)) * screenW;
+                const randomOffset = (Math.random() - 0.5) * screenW * 0.18;
+                const x = baseX + randomOffset;
+
+                // 初始 Y 在屏幕上方，随机高一点
+                const y = - (80 + Math.random() * 180);
+
+                // 随机水平速度，让轨迹不是直 up→down
+                const vx = (Math.random() - 0.5) * 220;
+
+                // 初始竖直速度
+                const vy = 0;
+
+                // 随机 groundY（落点高度），模拟落在 card 区域两侧
+                const groundY = groundMin + Math.random() * (groundMax - groundMin);
+
+                // 每个图标一个小延迟，让掉落更自然
+                const delay = Math.random() * 0.7;
+
+                // 初始直接透明
+                icon.style.opacity = 0;
+
+                return { icon, x, y, vx, vy, groundY, delay, done: false };
+            });
+
+            let lastTime = performance.now();
+
+            function step(now) {
+                const dt = (now - lastTime) / 1000;
+                lastTime = now;
+
+                let allDone = true;
+
+                for (const s of states) {
+                    if (s.done) continue;
+
+                    // 延迟阶段：不动，只减少 delay
+                    if (s.delay > 0) {
+                        s.delay -= dt;
+                        if (s.delay < 0) s.delay = 0;
+                        continue;
+                    }
+
+                    allDone = false;
+
+                    // 应用重力
+                    s.vy += g * dt;
+
+                    // 更新位置
+                    s.x += s.vx * dt;
+                    s.y += s.vy * dt;
+
+                    // 限制 X 不要跑出屏幕太多
+                    if (s.x < -40) s.x = -40;
+                    if (s.x > screenW + 40) s.x = screenW + 40;
+
+                    // 触地检测 + 弹跳
+                    if (s.y >= s.groundY) {
+                        s.y = s.groundY;
+
+                        if (Math.abs(s.vy) > minBounceVy) {
+                            // 反弹
+                            s.vy = -s.vy * bounceFactor;
+                            // 水平速度也稍微衰减
+                            s.vx *= friction;
+                        } else {
+                            // 速度太小了，停止弹跳，慢慢停下
+                            s.vy = 0;
+                            s.vx *= friction;
+
+                            if (Math.abs(s.vx) < 10) {
+                                s.vx = 0;
+                                s.done = true;
+                            }
+                        }
+                    }
+
+                    // 更新样式
+                    s.icon.style.opacity = 1;
+                    s.icon.style.transform = `translate3d(${s.x}px, ${s.y}px, 0)`;
+                }
+
+                if (!allDone) {
+                    requestAnimationFrame(step);
+                } else {
+                    // 最终停下后可以选择慢慢变淡（如果你想的话）
+                    // icons.forEach(ic => ic.style.transition = 'opacity 1s ease'; ic.style.opacity = 0.7;);
+                }
+            }
+
+            requestAnimationFrame(step);
+        });
+    </script>
 </body>
 </html>
