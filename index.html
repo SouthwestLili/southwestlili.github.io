@@ -19,7 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* 去掉默认下划线（GitHub Pages 对 h1/h2/h3 的样式） */
         h1, h2, h3 {
             border-bottom: none !important;
         }
@@ -28,14 +27,13 @@
         .main-title {
             font-family: 'Playfair Display', serif;
             font-weight: 1000;
-            border-bottom: none !important;
             margin-left: 40px;
             margin-bottom: 24px;
             position: relative;
             z-index: 2;
         }
 
-        /* 渐变文字 + 流光动画 */
+        /* 渐变文字 */
         .gradient-text {
             background: linear-gradient(90deg, #a6ffcb, #12d8fa, #1fa2ff, #a6ffcb);
             background-size: 200% 200%;
@@ -45,27 +43,25 @@
         }
 
         @keyframes gradient-move {
-            0%   { background-position: 0% 50%; }
-            50%  { background-position: 100% 50%; }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* 中间内容区域：整体居中 + 左右 padding */
+        /* 内容区域 */
         .content {
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 40px;
-            position: relative;
-            z-index: 1;
         }
 
         /* Typing SVG 居中 */
         .typing-wrapper {
             text-align: center;
-            margin: 16px 0 24px;
+            margin: 20px 0 32px;
         }
 
-        /* 竖向卡片布局：一个上一个下 */
+        /* 卡片布局 */
         .layout {
             max-width: 800px;
             margin: 0 auto;
@@ -74,11 +70,6 @@
             gap: 24px;
         }
 
-        .column {
-            width: 100%;
-        }
-
-        /* 卡片样式 */
         .card {
             background: #ffffff;
             border-radius: 18px;
@@ -92,7 +83,6 @@
         }
 
         ul {
-            text-align: left;
             padding-left: 1.2rem;
             margin: 0;
         }
@@ -101,14 +91,6 @@
             margin-bottom: 6px;
         }
 
-        hr {
-            margin: 32px auto;
-            width: 70%;
-            border: none;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        /* Tech Icons 容器（卡片里的） */
         .tech-icons {
             text-align: center;
             margin-top: 8px;
@@ -119,266 +101,215 @@
             margin: 6px;
             padding: 6px;
             border-radius: 12px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .tech-icons code img {
-            display: block;
-        }
-
-        /* Hover 效果：略微放大 + 抬升 + 阴影 + 提亮 */
         .tech-icons code:hover {
             transform: translateY(-4px) scale(1.08);
             box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
-            filter: brightness(1.08);
         }
 
-        /* ⭐ 重力掉落动画图标层 ⭐ */
+        /* ⭐ 重力掉落动画层 ⭐ */
         .falling-icons {
             position: fixed;
             inset: 0;
-            pointer-events: none;   /* 可以挡住文字，但不挡点击 */
-            z-index: 3;             /* 在内容上方 */
-            overflow: visible;
+            pointer-events: none;
+            z-index: 3;
         }
 
         .fall-icon {
             position: absolute;
             top: 0;
             left: 0;
-            width: 50px;            /* 和卡片里的图标一样大 */
+            width: 50px;
             opacity: 0;
             will-change: transform, opacity;
         }
 
-        /* 小屏优化 */
         @media (max-width: 768px) {
-            body {
-                margin: 20px;
-            }
-
-            .main-title {
-                margin-left: 20px;
-            }
-
-            .content {
-                padding: 0 16px;
-            }
-
-            .card {
-                padding: 20px 18px 18px;
-            }
-
-            .fall-icon {
-                width: 42px;
-            }
+            body { margin: 20px; }
+            .main-title { margin-left: 20px; }
+            .content { padding: 0 16px; }
+            .fall-icon { width: 42px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ⭐ 重力掉落动画图标层 ⭐ -->
+    <!-- ⭐ 掉落图标层 ⭐ -->
     <div class="falling-icons">
-        <!-- Languages + DB -->
-        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" />
-        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" />
-        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" />
-        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" />
-        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" />
-        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" alt="MySQL" />
-        <img class="fall-icon" data-role="lang" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" alt="mongoDB" />
+        <!-- Languages -->
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" />
 
-        <!-- Frameworks & Libraries -->
-        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" alt="Tailwind CSS" />
-        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" />
-        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" />
-        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" alt="Next.js" />
-        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" />
-        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" alt="Supabase" />
-        <img class="fall-icon" data-role="fw" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" alt="Express" />
+        <!-- Frameworks -->
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" />
+        <img class="fall-icon" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" />
     </div>
 
-    <!-- 顶部标题：保持左对齐不变 -->
+    <!-- 顶部标题 -->
     <h1 class="main-title">
-      <span class="gradient-text">
-        💚 Hi, I'm Lili. Happy to see you!👋
-      </span>
+        <span class="gradient-text">
+            💚 Hi, I'm Lili. Happy to see you!👋
+        </span>
     </h1>
 
-    <!-- 中间主内容区域 -->
+    <!-- 中间内容 -->
     <div class="content">
 
-        <!-- Typing SVG 动画文字 -->
-        <div>
-        <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Pacifico&size=40&pause=1000&color=9BF793&center=true&vCenter=true&height=100&lines=On+a+journey+to+decode+intelligence+and+inspire+the+next+wave+of+AI+innovation" alt="Typing SVG" /></a>
+        <!-- ⭐ 修复后的 Typing SVG（大高度 + 居中 + 全部显示） ⭐ -->
+        <div class="typing-wrapper">
+            <a href="https://git.io/typing-svg">
+                <img 
+                    src="https://readme-typing-svg.demolab.com?font=Pacifico&size=42&pause=1000&color=9BF793&center=true&vCenter=true&multiline=true&height=150&width=1200&lines=On+a+journey+to+decode+intelligence+and+inspire+the+next+wave+of+AI+innovation" 
+                    alt="Typing SVG"
+                />
+            </a>
         </div>
-            
-        <!-- 竖向卡片布局：上 About, 下 Tech Stack -->
+
+        <!-- 两张卡片 -->
         <div class="layout">
 
-            <!-- 上：About / Info 卡片 -->
-            <div class="column">
-                <div class="card">
-                    <h2>About Me</h2>
-                    <ul>
-                        <li>🥬 Currently pursuing <strong>Computer Science - Artificial Intelligence and Machine Learning studies at Carleton University</strong></li>
-                        <li>🎄 Currently completing <strong>the MIT x MicroMasters Program in Statistics and Data Science</strong></li>
-                        <li>🥒 Currently working on exciting full-stack and AI-driven projects</li>
-                        <li>🫛 Exploring topics in algorithms, system design, and web architecture</li>
-                        <li>🍀 Bachelor’s degree in Electrical Engineering</li>
-                        <li>🍁 Canadian citizen with TN visa eligibility for U.S. employment</li>
-                        <li>🥑 Contact: <a href="mailto:lili.bnottawa@gmail.com">lili.bnottawa@gmail.com</a></li>
-                        <li>🍏 Pronouns: she/her</li>
-                        <li>🥝 Fun fact: I love blending creativity with code!</li>
-                        <li>🫑 Always eager to learn and collaborate!</li>
-                        <li>🥦 Portfolio: <a href="https://liliwang.dev/" target="_blank" rel="noreferrer">https://liliwang.dev/</a></li>
-                        <li>🍐 Community: <a href="https://www.sylvanet.org/" target="_blank" rel="noreferrer">https://www.sylvanet.org/</a></li>
-                        <li>💚 SylvaNet Hub was founded on August 9, 2025 — features under development.</li>
-                    </ul>
-                </div>
+            <div class="card">
+                <h2>About Me</h2>
+                <ul>
+                    <li>🥬 Computer Science - AI & Machine Learning @ Carleton University</li>
+                    <li>🎄 MIT MicroMasters in Statistics and Data Science (in progress)</li>
+                    <li>🥒 Full-stack + AI-driven projects developer</li>
+                    <li>🫛 Interested in algorithms, system design, web architecture</li>
+                    <li>🍀 Bachelor's in Electrical Engineering</li>
+                    <li>🍁 Canadian citizen | TN visa eligible</li>
+                    <li>🥑 Email: <a href="mailto:lili.bnottawa@gmail.com">lili.bnottawa@gmail.com</a></li>
+                    <li>🍏 Pronouns: she/her</li>
+                    <li>🥝 Creativity × Code enthusiast</li>
+                    <li>🌿 Portfolio: <a href="https://liliwang.dev" target="_blank">https://liliwang.dev</a></li>
+                </ul>
             </div>
 
-            <!-- 下：Tech Stack 卡片 -->
-            <div class="column">
-                <div class="card">
-                    <h2>🛠️ Tech Stack</h2>
+            <div class="card">
+                <h2>🛠️ Tech Stack</h2>
 
-                    <h3>Languages</h3>
-                    <div class="tech-icons">
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" title="HTML" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" title="CSS" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" title="JavaScript" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" title="Java" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" title="Python" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" alt="MySQL" title="MySQL" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" alt="mongoDB" title="mongoDB" /></code>
-                    </div>
-
-                    <h3>Frameworks &amp; Libraries</h3>
-                    <div class="tech-icons">
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" alt="Tailwind CSS" title="Tailwind CSS" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" title="React" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" title="Node.js" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" alt="Next.js" title="Next.js" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" title="Spring Boot" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" alt="Supabase" title="Supabase" /></code>
-                        <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" alt="Express" title="Express" /></code>
-                    </div>
+                <h3>Languages</h3>
+                <div class="tech-icons">
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" /></code>
                 </div>
+
+                <h3>Frameworks</h3>
+                <div class="tech-icons">
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" /></code>
+                    <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" /></code>
+                </div>
+
             </div>
 
-        </div> <!-- /layout -->
+        </div>
 
         <hr />
 
     </div> <!-- /content -->
 
-    <!-- 重力掉落动画脚本：无事件绑定，直接运行 -->
+    <!-- 重力掉落动画 -->
     <script>
         (function () {
             var icons = Array.prototype.slice.call(document.querySelectorAll('.fall-icon'));
             if (!icons.length) return;
 
-            var screenW = window.innerWidth || document.documentElement.clientWidth;
-            var screenH = window.innerHeight || document.documentElement.clientHeight;
+            var W = window.innerWidth;
+            var H = window.innerHeight;
 
-            // 落在 60%~75% 高度区间（大概是 card 附近）
-            var groundMin = screenH * 0.60;
-            var groundMax = screenH * 0.75;
+            var groundMin = H * 0.60;
+            var groundMax = H * 0.75;
 
-            var g = 2600;              // 重力加速度（px/s^2）
-            var bounceFactor = 0.45;   // 弹性系数
-            var friction = 0.82;       // 水平速度衰减
-            var minBounceVy = 260;     // 低于这个速度就不再弹跳
+            var g = 2600;
+            var bounce = 0.45;
+            var friction = 0.82;
+            var minVy = 260;
 
-            var states = icons.map(function (icon, index) {
-                var baseX = ((index + 1) / (icons.length + 1)) * screenW;
-                var randomOffset = (Math.random() - 0.5) * screenW * 0.18;
-                var x = baseX + randomOffset;
+            var states = icons.map((icon, i) => {
+                var baseX = ((i + 1) / (icons.length + 1)) * W;
+                var x = baseX + (Math.random() - 0.5) * W * 0.18;
                 var y = - (80 + Math.random() * 180);
 
-                var vx = (Math.random() - 0.5) * 220; // 随机水平速度
-                var vy = 0;
-
-                var groundY = groundMin + Math.random() * (groundMax - groundMin);
-                var delay = Math.random() * 0.7;
-
-                icon.style.opacity = 0;
-
                 return {
-                    icon: icon,
-                    x: x,
-                    y: y,
-                    vx: vx,
-                    vy: vy,
-                    groundY: groundY,
-                    delay: delay,
+                    icon,
+                    x,
+                    y,
+                    vx: (Math.random() - 0.5) * 220,
+                    vy: 0,
+                    ground: groundMin + Math.random() * (groundMax - groundMin),
+                    delay: Math.random() * 0.7,
                     done: false
                 };
             });
 
-            var lastTime = performance.now();
+            var last = performance.now();
 
             function step(now) {
-                var dt = (now - lastTime) / 1000;
-                if (dt > 0.05) dt = 0.05; // 防止切走标签造成 dt 过大
-                lastTime = now;
+                var dt = (now - last) / 1000;
+                if (dt > 0.05) dt = 0.05;
+                last = now;
 
                 var allDone = true;
 
-                for (var i = 0; i < states.length; i++) {
-                    var s = states[i];
+                for (var s of states) {
                     if (s.done) continue;
 
-                    // 处理延迟
                     if (s.delay > 0) {
                         s.delay -= dt;
-                        if (s.delay < 0) s.delay = 0;
                         continue;
                     }
 
                     allDone = false;
-
-                    // 重力
                     s.vy += g * dt;
-
-                    // 更新位置
                     s.x += s.vx * dt;
                     s.y += s.vy * dt;
 
-                    // 限制 X 范围稍微宽一点
-                    if (s.x < -60) s.x = -60;
-                    if (s.x > screenW + 60) s.x = screenW + 60;
+                    if (s.y >= s.ground) {
+                        s.y = s.ground;
 
-                    // 触地 + 弹跳
-                    if (s.y >= s.groundY) {
-                        s.y = s.groundY;
-
-                        if (Math.abs(s.vy) > minBounceVy) {
-                            s.vy = -s.vy * bounceFactor;
+                        if (Math.abs(s.vy) > minVy) {
+                            s.vy = -s.vy * bounce;
                             s.vx *= friction;
                         } else {
                             s.vy = 0;
                             s.vx *= friction;
                             if (Math.abs(s.vx) < 10) {
-                                s.vx = 0;
                                 s.done = true;
                             }
                         }
                     }
 
-                    // 更新样式
                     s.icon.style.opacity = 1;
-                    s.icon.style.transform = 'translate3d(' + s.x + 'px,' + s.y + 'px,0)';
+                    s.icon.style.transform = `translate3d(${s.x}px, ${s.y}px, 0)`;
                 }
 
-                if (!allDone) {
-                    window.requestAnimationFrame(step);
-                }
+                if (!allDone) requestAnimationFrame(step);
             }
 
-            window.requestAnimationFrame(step);
+            requestAnimationFrame(step);
         })();
     </script>
+
 </body>
 </html>
