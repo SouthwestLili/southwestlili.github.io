@@ -32,7 +32,7 @@
             margin-left: 40px;
             margin-bottom: 24px;
             position: relative;
-            z-index: 2; /* 保证在动画层上方 */
+            z-index: 2;
         }
 
         /* 渐变文字 + 流光动画 */
@@ -56,7 +56,7 @@
             margin: 0 auto;
             padding: 0 40px;
             position: relative;
-            z-index: 2; /* 也在动画层上方 */
+            z-index: 1;
         }
 
         /* Typing SVG 居中 */
@@ -137,38 +137,65 @@
         .falling-icons {
             position: fixed;
             inset: 0;
-            pointer-events: none;  /* 不挡点击 */
-            z-index: 1;            /* 在背景上，在内容下 */
+            pointer-events: none;  /* 只遮挡视觉，不影响点击 */
+            z-index: 3;            /* 在内容上方，标题之上也可以遮住 */
             overflow: visible;
         }
 
         .fall-icon {
             position: absolute;
-            top: -80px;            /* 从屏幕上方外面开始 */
+            top: -120px;           /* 从屏幕上方外面开始 */
+            width: 50px;           /* 与卡片图标大小一致 */
             opacity: 0;
-            animation-name: fall;
-            animation-timing-function: ease-out;
+            animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
             animation-iteration-count: 1;
             animation-fill-mode: forwards; /* 停在终点 */
         }
 
-        /* 不同图标的“随机感”：位置 + 时长 + 延迟 */
-        .fall-1 { left: 8%;  animation-duration: 3.8s; animation-delay: 0.1s; }
-        .fall-2 { left: 22%; animation-duration: 4.2s; animation-delay: 0.4s; }
-        .fall-3 { left: 40%; animation-duration: 4.8s; animation-delay: 0.2s; }
-        .fall-4 { left: 62%; animation-duration: 4.0s; animation-delay: 0.6s; }
-        .fall-5 { left: 78%; animation-duration: 4.5s; animation-delay: 0.3s; }
-        .fall-6 { left: 90%; animation-duration: 5.0s; animation-delay: 0.7s; }
+        /* 不同图标的“随机感”：位置 + 时长 + 延迟 + 路线（不同 keyframes） */
+        .fall-a { left: 10%; animation-name: fall-left;  animation-duration: 2.8s; animation-delay: 0.1s; }
+        .fall-b { left: 23%; animation-name: fall-zig;   animation-duration: 3.0s; animation-delay: 0.25s; }
+        .fall-c { left: 36%; animation-name: fall-right; animation-duration: 2.7s; animation-delay: 0.15s; }
+        .fall-d { left: 49%; animation-name: fall-zig;   animation-duration: 3.1s; animation-delay: 0.35s; }
+        .fall-e { left: 62%; animation-name: fall-left;  animation-duration: 2.9s; animation-delay: 0.2s; }
+        .fall-f { left: 75%; animation-name: fall-right; animation-duration: 3.0s; animation-delay: 0.3s; }
+        .fall-g { left: 88%; animation-name: fall-zig;   animation-duration: 3.2s; animation-delay: 0.4s; }
 
-        /* 掉落动画：
-           - 先从上方进入
-           - 中间有一点点左右偏移
-           - 最后停在大约卡片区域两侧附近（用 100vh - 常数 近似） */
-        @keyframes fall {
+        .fall-h { left: 5%;  animation-name: fall-right; animation-duration: 3.0s; animation-delay: 0.5s; }
+        .fall-i { left: 18%; animation-name: fall-left;  animation-duration: 2.8s; animation-delay: 0.55s; }
+        .fall-j { left: 31%; animation-name: fall-zig;   animation-duration: 3.1s; animation-delay: 0.6s; }
+        .fall-k { left: 44%; animation-name: fall-right; animation-duration: 2.9s; animation-delay: 0.65s; }
+        .fall-l { left: 57%; animation-name: fall-left;  animation-duration: 3.0s; animation-delay: 0.7s; }
+        .fall-m { left: 70%; animation-name: fall-zig;   animation-duration: 3.2s; animation-delay: 0.75s; }
+        .fall-n { left: 83%; animation-name: fall-right; animation-duration: 3.1s; animation-delay: 0.8s; }
+
+        /* 三种略微不同的掉落路线 + 弹跳效果 */
+        @keyframes fall-left {
             0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-            15%  { opacity: 1; }
-            60%  { transform: translate3d(-10px, 55vh, 0); }
-            100% { transform: translate3d(5px, 65vh, 0); opacity: 1; }
+            10%  { opacity: 1; }
+            50%  { transform: translate3d(-25px, 45vh, 0); }
+            70%  { transform: translate3d(10px, 70vh, 0); }
+            85%  { transform: translate3d(-8px, 63vh, 0); }  /* 弹起 */
+            100% { transform: translate3d(0, 66vh, 0); opacity: 1; }
+        }
+
+        @keyframes fall-right {
+            0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+            10%  { opacity: 1; }
+            50%  { transform: translate3d(25px, 48vh, 0); }
+            70%  { transform: translate3d(-12px, 72vh, 0); }
+            85%  { transform: translate3d(6px, 64vh, 0); }   /* 弹起 */
+            100% { transform: translate3d(0, 68vh, 0); opacity: 1; }
+        }
+
+        @keyframes fall-zig {
+            0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+            10%  { opacity: 1; }
+            35%  { transform: translate3d(-18px, 30vh, 0); }
+            55%  { transform: translate3d(24px, 55vh, 0); }
+            75%  { transform: translate3d(-10px, 73vh, 0); }
+            88%  { transform: translate3d(6px, 64vh, 0); }   /* 弹起 */
+            100% { transform: translate3d(0, 67vh, 0); opacity: 1; }
         }
 
         /* 小屏优化 */
@@ -190,21 +217,32 @@
             }
 
             .fall-icon {
-                transform: scale(0.8);
+                width: 42px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ⭐ 掉落动画图标层（只做动画用）⭐ -->
+    <!-- ⭐ 掉落动画图标层（与卡片图标同源，但只是动画用）⭐ -->
     <div class="falling-icons">
-        <img class="fall-icon fall-1" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" />
-        <img class="fall-icon fall-2" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" />
-        <img class="fall-icon fall-3" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JS" />
-        <img class="fall-icon fall-4" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" />
-        <img class="fall-icon fall-5" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" />
-        <img class="fall-icon fall-6" width="40" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" />
+        <!-- Languages + DB -->
+        <img class="fall-icon fall-a" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/html.png" alt="HTML" />
+        <img class="fall-icon fall-b" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/css.png" alt="CSS" />
+        <img class="fall-icon fall-c" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/javascript.png" alt="JavaScript" />
+        <img class="fall-icon fall-d" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" />
+        <img class="fall-icon fall-e" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" alt="Python" />
+        <img class="fall-icon fall-f" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mysql.png" alt="MySQL" />
+        <img class="fall-icon fall-g" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/mongodb.png" alt="mongoDB" />
+
+        <!-- Frameworks & Libraries -->
+        <img class="fall-icon fall-h" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" alt="Tailwind CSS" />
+        <img class="fall-icon fall-i" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" alt="React" />
+        <img class="fall-icon fall-j" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/node_js.png" alt="Node.js" />
+        <img class="fall-icon fall-k" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" alt="Next.js" />
+        <img class="fall-icon fall-l" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" />
+        <img class="fall-icon fall-m" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" alt="Supabase" />
+        <img class="fall-icon fall-n" width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/express.png" alt="Express" />
     </div>
 
     <!-- 顶部标题：保持左对齐不变 -->
